@@ -26,6 +26,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+     # Step 2: Generate package.json (if missing)
+    - name: Generate package.json
+      run: |
+        if [ ! -f package.json ]; then
+          npm init -y
+        fi
     # Step 3:Install dependencies and Build     
     - name: Install dependencies and Build
       run: |
