@@ -33,7 +33,16 @@ jobs:
           npm init -y
         fi
     # Step 3:Install dependencies and Build     
-    - name: Install dependencies and Build
+    - name: Install dependencies
       run: |
         npm install
         npm run start
+    - name: Build 
+      run: |
+        if grep -q '"build":' package.json; then
+          npm run build
+        else
+          echo "No build script found. Running custom build steps..."
+          # Add your custom build commands here, e.g., for a simple Node.js app:
+          npm run start  # If you just need to run the app, or any custom build command
+        fi
